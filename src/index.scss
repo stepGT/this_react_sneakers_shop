@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: system-ui;
+  font-family: 'Inter';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #e7f6ff;
@@ -8,8 +8,26 @@ body {
 
 .wrapper {
   background: #fff;
-  box-shadow: 0 10px rgba(0,0,0, .04);
+  box-shadow: 0 10px rgba(0, 0, 0, 0.04);
   border-radius: 20px;
   max-width: 1080px;
   margin: 50px auto;
+  .header {
+    border-bottom: 1px solid #eaeaea;
+    &__left {
+      h3, p {
+        margin: 0;
+      }
+    }
+    &__right {
+      h3, p {
+        margin: 0;
+      }
+    }
+  }
+  .content {
+    h1 {
+      margin: 0;
+    }
+  }
 }
