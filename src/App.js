@@ -1,6 +1,25 @@
 function App() {
   return (
     <div className="wrapper clear">
+      <div className="wrapper__overlay">
+        <div className="wrapper__drawer">
+          <h2>Cart</h2>
+          <div className="wrapper__drawer_cart_item d-flex">
+            <img
+              className="mr-20"
+              width={70}
+              height={70}
+              alt="Sneakers"
+              src="/img/sneakers/1.jpg"
+            />
+            <div className="mr-20">
+              <p className="mb-5">Мужские кроссовки NIKE Blazer Mid Suede</p>
+              <b>12999 &#8381;</b>
+            </div>
+            <img className="wrapper__drawer_cart_item_button" alt="Button" src="/img/btn-remove.svg" />
+          </div>
+        </div>
+      </div>
       <header className="header d-flex justify-between align-center p-40">
         <div className="header__left d-flex align-center">
           <img className="mr-15" width={40} height={40} alt="Logo" src="/img/logo.png" />
