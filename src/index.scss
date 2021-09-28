@@ -27,7 +27,7 @@ body {
   }
   &__drawer {
     position: absolute;
-    width: 385px;
+    width: 420px;
     height: 100%;
     right: 0;
     background: #fff;
@@ -41,6 +41,7 @@ body {
       border: 1px solid #f3f3f3;
       border-radius: 20px;
       overflow: hidden;
+      padding: 20px;
       &_button {
         cursor: pointer;
         opacity: .5;
@@ -49,8 +50,17 @@ body {
           opacity: 1;
         }
       }
+      &_image {
+        width: 70px;
+        height: 70px;
+        background-size: contain;
+        background-position: 0 -3px;
+        background-repeat: no-repeat;
+        margin-right: 20px;
+      }
       p {
         font-size: 16px;
+        margin: 0;
       }
       b {
         font-size: 14px;

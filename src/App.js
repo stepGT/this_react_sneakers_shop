@@ -3,16 +3,10 @@ function App() {
     <div className="wrapper clear">
       <div className="wrapper__overlay">
         <div className="wrapper__drawer">
-          <h2>Cart</h2>
+          <h2 className="mb-30">Cart</h2>
           <div className="wrapper__drawer_cart_item d-flex">
-            <img
-              className="mr-20"
-              width={70}
-              height={70}
-              alt="Sneakers"
-              src="/img/sneakers/1.jpg"
-            />
-            <div className="mr-20">
+            <div className="wrapper__drawer_cart_item_image" style={{ backgroundImage: 'url(/img/sneakers/1.jpg)' }}></div>
+            <div className="mr-20 flex">
               <p className="mb-5">Мужские кроссовки NIKE Blazer Mid Suede</p>
               <b>12999 &#8381;</b>
             </div>
