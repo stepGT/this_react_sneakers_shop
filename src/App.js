@@ -30,6 +30,9 @@ function App() {
         </div>
         <div className="d-flex">
           <div className="card">
+            <div className="content__card_favorite">
+              <img src="/img/unliked.svg" alt="Liked" />
+            </div>
             <img
               width={133}
               height={112}
