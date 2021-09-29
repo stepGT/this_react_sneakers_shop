@@ -1,7 +1,9 @@
+import Card from "./components/Card";
+
 function App() {
   return (
     <div className="wrapper clear">
-      <div className="wrapper__overlay">
+      <div style={{ display: 'none' }} className="wrapper__overlay">
         <div className="wrapper__drawer">
           <h2 className="mb-30 d-flex justify-between">Cart
             <img className="wrapper__drawer_cart_item_button" alt="Button" src="/img/btn-remove.svg" />
@@ -69,81 +71,7 @@ function App() {
           </div>
         </div>
         <div className="d-flex">
-          <div className="card">
-            <div className="content__card_favorite">
-              <img src="/img/unliked.svg" alt="Liked" />
-            </div>
-            <img
-              width={133}
-              height={112}
-              src="/img/sneakers/1.jpg"
-              alt="Sneakers"
-            />
-            <h5>Мужские кроссовки NIKE Blazer Mid Suede</h5>
-            <div className="d-flex justify-between align-center">
-              <div className="d-flex flex-column">
-                <span>Price</span>
-                <b>12999 &#8381;</b>
-              </div>
-              <button className="card__button">
-                <img width={11} height={11} alt="" src="/img/plus.svg" />
-              </button>
-            </div>
-          </div>
-          <div className="card">
-            <img
-              width={133}
-              height={112}
-              src="/img/sneakers/2.jpg"
-              alt="Sneakers"
-            />
-            <h5>Мужские кроссовки NIKE Blazer Mid Suede</h5>
-            <div className="d-flex justify-between align-center">
-              <div className="d-flex flex-column">
-                <span>Price</span>
-                <b>12999 &#8381;</b>
-              </div>
-              <button className="card__button">
-                <img width={11} height={11} alt="" src="/img/plus.svg" />
-              </button>
-            </div>
-          </div>
-          <div className="card">
-            <img
-              width={133}
-              height={112}
-              src="/img/sneakers/3.jpg"
-              alt="Sneakers"
-            />
-            <h5>Мужские кроссовки NIKE Blazer Mid Suede</h5>
-            <div className="d-flex justify-between align-center">
-              <div className="d-flex flex-column">
-                <span>Price</span>
-                <b>12999 &#8381;</b>
-              </div>
-              <button className="card__button">
-                <img width={11} height={11} alt="" src="/img/plus.svg" />
-              </button>
-            </div>
-          </div>
-          <div className="card">
-            <img
-              width={133}
-              height={112}
-              src="/img/sneakers/4.jpg"
-              alt="Sneakers"
-            />
-            <h5>Мужские кроссовки NIKE Blazer Mid Suede</h5>
-            <div className="d-flex justify-between align-center">
-              <div className="d-flex flex-column">
-                <span>Price</span>
-                <b>12999 &#8381;</b>
-              </div>
-              <button className="card__button">
-                <img width={11} height={11} alt="" src="/img/plus.svg" />
-              </button>
-            </div>
-          </div>
+          <Card/>
         </div>
       </div>
     </div>
