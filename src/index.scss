@@ -70,6 +70,8 @@ body {
     }
     &_cart_items {
       flex: 1;
+      overflow: auto;
+      margin-bottom: 40px;
     }
     &_cart_total_block {
       .green_btn {

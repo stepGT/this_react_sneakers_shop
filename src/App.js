@@ -3,7 +3,9 @@ function App() {
     <div className="wrapper clear">
       <div className="wrapper__overlay">
         <div className="wrapper__drawer">
-          <h2 className="mb-30">Cart</h2>
+          <h2 className="mb-30 d-flex justify-between">Cart
+            <img className="wrapper__drawer_cart_item_button" alt="Button" src="/img/btn-remove.svg" />
+          </h2>
           <div className="wrapper__drawer_cart_items">
             <div className="wrapper__drawer_cart_item d-flex mb-20">
               <div className="wrapper__drawer_cart_item_image" style={{ backgroundImage: 'url(/img/sneakers/1.jpg)' }}></div>
