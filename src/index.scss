@@ -53,17 +53,6 @@ body {
         cursor: pointer;
       }
     }
-    &__search_block {
-      input {
-        border: 0;
-        padding: 13px;
-        font-size: 16px;
-        width: 200px;
-      }
-      border: 1px solid #f3f3f3;
-      border-radius: 10px;
-      padding: 0 15px;
-    }
     &__card_favorite {
       position: absolute;
       cursor: pointer;
