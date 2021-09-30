@@ -1,6 +1,7 @@
 import Card from "./components/Card";
 import Header from "./components/Header";
 import Drawer from "./components/Drawer";
+import Search from "./components/Search";
 
 function App() {
   return (
@@ -10,10 +11,7 @@ function App() {
       <div className="content p-40">
         <div className="d-flex align-center justify-between mb-40">
           <h1>All sneakers</h1>
-          <div className="content__search_block d-flex">
-            <img src="/img/search.svg" alt="Search" />
-            <input placeholder="Search..." type="text" />
-          </div>
+          <Search/>
         </div>
         <div className="d-flex">
           <Card/>
