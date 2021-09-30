@@ -1,21 +1,22 @@
 import React from "react";
+import styles from './Card.module.scss';
 
-const Card = () => {
+const Card = (props) => {
     return (
-        <div className="card">
+        <div className={styles.card}>
             <img
                 width={133}
                 height={112}
-                src="/img/sneakers/1.jpg"
+                src={props.imageUrl}
                 alt="Sneakers"
             />
-            <h5>Мужские кроссовки NIKE Blazer Mid Suede</h5>
+            <h5>{props.title}</h5>
             <div className="d-flex justify-between align-center">
                 <div className="d-flex flex-column">
                     <span>Price</span>
-                    <b>12999 &#8381;</b>
+                    <b>{props.price} &#8381;</b>
                 </div>
-                <button className="card__button">
+                <button className={styles.cardButton}>
                     <img width={11} height={11} alt="" src="/img/plus.svg" />
                 </button>
             </div>
