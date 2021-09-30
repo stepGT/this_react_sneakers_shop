@@ -1,5 +1,5 @@
 import Card from "./components/Card";
-import Header from "./components/Header";
+import Header from "./components/Header/Header";
 import Drawer from "./components/Drawer/Drawer";
 import Search from "./components/Search";
 
