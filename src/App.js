@@ -1,6 +1,6 @@
 import Card from "./components/Card";
 import Header from "./components/Header";
-import Drawer from "./components/Drawer";
+import Drawer from "./components/Drawer/Drawer";
 import Search from "./components/Search";
 
 const sneakers = [
