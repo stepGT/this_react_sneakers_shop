@@ -9,22 +9,17 @@ const Drawer = (props) => {
                     <img onClick={props.onClose} className={styles.buttonRemove} alt="Button" src="/img/btn-remove.svg" />
                 </h2>
                 <div className={styles.cartItems}>
-                    <div className={styles.cartItem}>
-                        <div className={styles.cartItemImage} style={{ backgroundImage: 'url(/img/sneakers/1.jpg)' }}></div>
+                    {props.cartSneakers.map(item => {
+                        return <div className={styles.cartItem}>
+                        <div className={styles.cartItemImage} style={{ backgroundImage: `url(${item.imageUrl})` }}></div>
                         <div className="mr-20 flex">
-                            <p className="mb-5">Мужские кроссовки NIKE Blazer Mid Suede</p>
-                            <b>12999 &#8381;</b>
+                            <p className="mb-5">{ item.title }</p>
+                            <b>{ item.price } &#8381;</b>
                         </div>
                         <img className={styles.buttonRemove} alt="Button" src="/img/btn-remove.svg" />
                     </div>
-                    <div className={styles.cartItem}>
-                        <div className={styles.cartItemImage} style={{ backgroundImage: 'url(/img/sneakers/1.jpg)' }}></div>
-                        <div className="mr-20 flex">
-                            <p className="mb-5">Мужские кроссовки NIKE Blazer Mid Suede</p>
-                            <b>12999 &#8381;</b>
-                        </div>
-                        <img className={styles.buttonRemove} alt="Button" src="/img/btn-remove.svg" />
-                    </div>
+                    })}
+                    
                 </div>
                 <div className={styles.totalBlock}>
                     <ul>

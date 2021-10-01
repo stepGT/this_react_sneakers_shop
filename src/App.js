@@ -7,6 +7,10 @@ import Search from "./components/Search/Search";
 function App() {
   const [isOpened, setIsOpened] = useState(false);
   const [sneakers, setSneakers] = useState([]);
+  const [cartSneakers, setCartSneakers] = useState([]);
+  const onAddToCart = (obj) => {
+    setCartSneakers(prev => ([...prev, obj]))
+  }
   //
   useEffect(() => {
     fetch('https://615684b5e039a0001725aa2e.mockapi.io/items')
@@ -15,7 +19,7 @@ function App() {
   }, []);
   return (
     <div className="wrapper clear">
-      { isOpened && <Drawer onClose={() => setIsOpened(false)} /> }
+      { isOpened && <Drawer cartSneakers={cartSneakers} onClose={() => setIsOpened(false)} /> }
       <Header onClickCard={() => setIsOpened(true)} />
       <div className="content p-40">
         <div className="d-flex align-center justify-between mb-40">
@@ -23,7 +27,11 @@ function App() {
           <Search/>
         </div>
         <div className="d-flex flex-wrap">
-          {sneakers.map(el => <Card key={el.id} {...el} />)}
+          {sneakers.map(el => <Card
+            onPlus={(obj) => onAddToCart(obj)}
+            key={el.id} 
+            {...el} />)
+          }
         </div>
       </div>
     </div>
