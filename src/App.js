@@ -1,3 +1,4 @@
+import {useState} from 'react';
 import Card from "./components/Card/Card";
 import Header from "./components/Header/Header";
 import Drawer from "./components/Drawer/Drawer";
@@ -31,10 +32,11 @@ const sneakers = [
 ];
 
 function App() {
+  const [isOpened, setIsOpened] = useState(false);
   return (
     <div className="wrapper clear">
-      <Drawer/>
-      <Header/>
+      { isOpened && <Drawer onClose={() => setIsOpened(false)} /> }
+      <Header onClickCard={() => setIsOpened(true)} />
       <div className="content p-40">
         <div className="d-flex align-center justify-between mb-40">
           <h1>All sneakers</h1>

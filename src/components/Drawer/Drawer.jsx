@@ -1,12 +1,12 @@
 import React from "react";
 import styles from './Drawer.module.scss';
 
-const Drawer = () => {
+const Drawer = (props) => {
     return (
-        <div style={{ display: 'block' }} className={styles.overlay}>
+        <div className={styles.overlay}>
             <div className={styles.drawer}>
                 <h2 className="mb-30 d-flex justify-between">Cart
-                    <img className={styles.buttonRemove} alt="Button" src="/img/btn-remove.svg" />
+                    <img onClick={props.onClose} className={styles.buttonRemove} alt="Button" src="/img/btn-remove.svg" />
                 </h2>
                 <div className={styles.cartItems}>
                     <div className={styles.cartItem}>
