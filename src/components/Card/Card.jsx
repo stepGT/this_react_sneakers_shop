@@ -1,11 +1,11 @@
 import React from "react";
 import styles from './Card.module.scss';
 
-const Card = ({ title, imageUrl, price, onPlus }) => {
+const Card = ({ id, title, imageUrl, price, onPlus }) => {
     const [isAdded, setIsAdded] = React.useState(false);
     const onClickHandler = (e) => {
         setIsAdded(!isAdded);
-        onPlus({ title, imageUrl, price });
+        onPlus({ id, title, imageUrl, price });
     }
     return (
         <div className={styles.card}>

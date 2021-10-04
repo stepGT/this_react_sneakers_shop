@@ -3,6 +3,7 @@ import Card from "./components/Card/Card";
 import Header from "./components/Header/Header";
 import Drawer from "./components/Drawer/Drawer";
 import Search from "./components/Search/Search";
+import axios from 'axios';
 
 function App() {
   const [isOpened, setIsOpened] = useState(false);
@@ -10,20 +11,25 @@ function App() {
   const [cartSneakers, setCartSneakers] = useState([]);
   const [searchValue, setSearchValue] = useState('');
   const onAddToCart = (obj) => {
-    setCartSneakers(prev => ([...prev, obj]))
+    axios.post(`${process.env.REACT_APP_MOCKAPI_URL}/cart`, obj).then(res => setCartSneakers(prev => ([...prev, obj])));
   }
   const onChangeSearchInput = (e) => {
     setSearchValue(e.target.value)
   } 
+  const onRemoveItem = id => {
+    axios.delete(`${process.env.REACT_APP_MOCKAPI_URL}/cart/${id}`);
+    setCartSneakers(prev => prev.filter(item => item.id !== id));
+  };
   //
   useEffect(() => {
-    fetch('https://615684b5e039a0001725aa2e.mockapi.io/items')
-      .then(response => response.json())
-      .then(data => setSneakers(data));
+      axios.get(`${process.env.REACT_APP_MOCKAPI_URL}/items`)
+      .then(res => setSneakers(res.data))
+      axios.get(`${process.env.REACT_APP_MOCKAPI_URL}/cart`)
+      .then(res => setCartSneakers(res.data))
   }, []);
   return (
     <div className="wrapper clear">
-      { isOpened && <Drawer cartSneakers={cartSneakers} onClose={() => setIsOpened(false)} /> }
+      { isOpened && <Drawer cartSneakers={cartSneakers} onClose={() => setIsOpened(false)} onRemove={onRemoveItem} /> }
       <Header onClickCard={() => setIsOpened(true)} />
       <div className="content p-40">
         <div className="d-flex align-center justify-between mb-40">
