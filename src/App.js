@@ -3,6 +3,7 @@ import Card from "./components/Card/Card";
 import Header from "./components/Header/Header";
 import Drawer from "./components/Drawer/Drawer";
 import Search from "./components/Search/Search";
+import axios from 'axios';
 
 function App() {
   const [isOpened, setIsOpened] = useState(false);
@@ -17,9 +18,8 @@ function App() {
   } 
   //
   useEffect(() => {
-    fetch('https://615684b5e039a0001725aa2e.mockapi.io/items')
-      .then(response => response.json())
-      .then(data => setSneakers(data));
+      axios.get('https://615684b5e039a0001725aa2e.mockapi.io/items')
+      .then(res => setSneakers(res.data))
   }, []);
   return (
     <div className="wrapper clear">
