@@ -16,6 +16,10 @@ function App() {
   const onChangeSearchInput = (e) => {
     setSearchValue(e.target.value)
   } 
+  const onRemoveItem = id => {
+    axios.delete(`${process.env.REACT_APP_MOCKAPI_URL}/cart/${id}`);
+    setCartSneakers(prev => prev.filter(item => item.id !== id));
+  };
   //
   useEffect(() => {
       axios.get(`${process.env.REACT_APP_MOCKAPI_URL}/items`)
@@ -25,7 +29,7 @@ function App() {
   }, []);
   return (
     <div className="wrapper clear">
-      { isOpened && <Drawer cartSneakers={cartSneakers} onClose={() => setIsOpened(false)} /> }
+      { isOpened && <Drawer cartSneakers={cartSneakers} onClose={() => setIsOpened(false)} onRemove={onRemoveItem} /> }
       <Header onClickCard={() => setIsOpened(true)} />
       <div className="content p-40">
         <div className="d-flex align-center justify-between mb-40">

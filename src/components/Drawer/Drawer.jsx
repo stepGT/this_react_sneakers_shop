@@ -16,7 +16,7 @@ const Drawer = (props) => {
                             <p className="mb-5">{ item.title }</p>
                             <b>{ item.price } &#8381;</b>
                         </div>
-                        <img className={styles.buttonRemove} alt="Button" src="/img/btn-remove.svg" />
+                        <img onClick={() => {props.onRemove(item.id)}} className={styles.buttonRemove} alt="Button" src="/img/btn-remove.svg" />
                     </div>
                     })}
                     
