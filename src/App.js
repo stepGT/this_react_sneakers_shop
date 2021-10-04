@@ -18,7 +18,7 @@ function App() {
   } 
   //
   useEffect(() => {
-      axios.get('https://615684b5e039a0001725aa2e.mockapi.io/items')
+      axios.get(`${process.env.REACT_APP_MOCKAPI_URL}/items`)
       .then(res => setSneakers(res.data))
   }, []);
   return (
