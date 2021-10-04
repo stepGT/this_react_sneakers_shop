@@ -11,7 +11,7 @@ function App() {
   const [cartSneakers, setCartSneakers] = useState([]);
   const [searchValue, setSearchValue] = useState('');
   const onAddToCart = (obj) => {
-    setCartSneakers(prev => ([...prev, obj]))
+    axios.post(`${process.env.REACT_APP_MOCKAPI_URL}/cart`, obj).then(res => setCartSneakers(prev => ([...prev, obj])));
   }
   const onChangeSearchInput = (e) => {
     setSearchValue(e.target.value)
@@ -20,6 +20,8 @@ function App() {
   useEffect(() => {
       axios.get(`${process.env.REACT_APP_MOCKAPI_URL}/items`)
       .then(res => setSneakers(res.data))
+      axios.get(`${process.env.REACT_APP_MOCKAPI_URL}/cart`)
+      .then(res => setCartSneakers(res.data))
   }, []);
   return (
     <div className="wrapper clear">
