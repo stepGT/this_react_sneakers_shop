@@ -42,7 +42,7 @@ const Drawer = (props) => {
                         <img class="mb-20" width="120px" height="120px" src="/img/empty-cart.jpg" alt="Empty" />
                         <h2>Cart is empty</h2>
                         <p class="opacity-6">Add at least one pair of sneakers to order.</p>
-                        <button class={`${styles.greenButton} ${styles.greenBtn}`}>
+                        <button onClick={props.onClose} class={`${styles.greenButton} ${styles.greenBtn}`}>
                             <img src="/img/arrow.svg" alt="Arrow" />
                             Back
                         </button>
