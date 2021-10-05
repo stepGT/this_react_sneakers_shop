@@ -16,6 +16,9 @@ const Header = (props) => {
                 <img className="mr-15" width={18} height={18} alt="Logo" src="/img/user.svg" />
                 <span>1205 rub</span>
             </li>
+            <li className="mr-20 cu-p">
+                <img width={18} height={18} alt="Favorites" src="/img/heart.svg" />
+            </li>
             <li>
                 <img width={18} height={18} alt="Logo" src="/img/cart.svg" />
             </li>
