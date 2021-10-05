@@ -28,11 +28,11 @@ function App() {
       //
       if (favorites.find((favorites) => favorites.id === obj.id)) {
         axios.delete(
-          `${process.env.REACT_APP_MOCKAPI_URL}/favorites2/${obj.id}`
+          `${process.env.REACT_APP_MOCKAPI_URL}/favorites/${obj.id}`
         );
       } else {
         const { data } = await axios.post(
-          `${process.env.REACT_APP_MOCKAPI_URL}/favorites2`,
+          `${process.env.REACT_APP_MOCKAPI_URL}/favorites`,
           obj
         );
         setFavorites((prev) => [...prev, data]);
