@@ -23,13 +23,14 @@ function App() {
     axios.delete(`${process.env.REACT_APP_MOCKAPI_URL}/cart/${id}`);
     setCartSneakers(prev => prev.filter(item => item.id !== id));
   };
-  const onAddToFavorites = obj => {
+  const onAddToFavorites = async obj => {
     //
     if(favorites.find(favorites => favorites.id === obj.id)) {
       axios.delete(`${process.env.REACT_APP_MOCKAPI_URL}/favorites/${obj.id}`);
     }
     else {
-      axios.post(`${process.env.REACT_APP_MOCKAPI_URL}/favorites`, obj).then(setFavorites(prev => ([...prev, obj])));
+      const { data } = await axios.post(`${process.env.REACT_APP_MOCKAPI_URL}/favorites`, obj);
+      setFavorites(prev => ([...prev, data]))
     }
   };
   //
