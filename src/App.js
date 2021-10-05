@@ -10,6 +10,8 @@ function App() {
   const [sneakers, setSneakers] = useState([]);
   const [cartSneakers, setCartSneakers] = useState([]);
   const [searchValue, setSearchValue] = useState('');
+  const [favorites, setFavorites] = useState([]);
+  //
   const onAddToCart = (obj) => {
     axios.post(`${process.env.REACT_APP_MOCKAPI_URL}/cart`, obj).then(res => setCartSneakers(prev => ([...prev, obj])));
   }
@@ -19,6 +21,9 @@ function App() {
   const onRemoveItem = id => {
     axios.delete(`${process.env.REACT_APP_MOCKAPI_URL}/cart/${id}`);
     setCartSneakers(prev => prev.filter(item => item.id !== id));
+  };
+  const onAddToFavorites = obj => {
+    axios.post(`${process.env.REACT_APP_MOCKAPI_URL}/favorites`, obj).then(setFavorites(prev => ([...prev, obj])));
   };
   //
   useEffect(() => {
@@ -39,6 +44,7 @@ function App() {
         <div className="d-flex flex-wrap">
           {sneakers.filter(item => item.title.toLowerCase().includes(searchValue)).map(el => <Card
             onPlus={(obj) => onAddToCart(obj)}
+            onFavorites={(obj) => onAddToFavorites(obj)}
             key={el.id} 
             {...el} />)
           }

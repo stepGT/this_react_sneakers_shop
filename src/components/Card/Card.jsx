@@ -1,7 +1,7 @@
 import React from "react";
 import styles from './Card.module.scss';
 
-const Card = ({ id, title, imageUrl, price, onPlus }) => {
+const Card = ({ id, title, imageUrl, price, onPlus, onFavorites }) => {
     const [isAdded, setIsAdded] = React.useState(false);
     const [isFavorite, setIsFavorite] = React.useState(false);
     const onClickHandler = (e) => {
@@ -9,12 +9,13 @@ const Card = ({ id, title, imageUrl, price, onPlus }) => {
         onPlus({ id, title, imageUrl, price });
     }
     const onClickFavorite = () => {
+        onFavorites({ id, title, imageUrl, price });
         setIsFavorite(!isFavorite)
     }
     return (
         <div className={styles.card}>
             <div className={styles.favorite} onClick={() => { }}>
-                <img onClick={onClickFavorite} src={isFavorite ? '/img/liked.svg' : '/img/unliked.svg'} className="cu-p" alt={isFavorite ? 'Liked' : 'Unliked'} />
+                <img onClick={() => onClickFavorite({ id, title, imageUrl, price })} src={isFavorite ? '/img/liked.svg' : '/img/unliked.svg'} className="cu-p" alt={isFavorite ? 'Liked' : 'Unliked'} />
             </div>
             <img
                 width={133}
