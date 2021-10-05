@@ -3,6 +3,7 @@ import Header from "./components/Header/Header";
 import Drawer from "./components/Drawer/Drawer";
 import axios from 'axios';
 import Home from './pages/Home';
+import Favorites from './pages/Favorites';
 import { Route } from 'react-router';
 
 function App() {
@@ -31,6 +32,8 @@ function App() {
       .then(res => setSneakers(res.data))
       axios.get(`${process.env.REACT_APP_MOCKAPI_URL}/cart`)
       .then(res => setCartSneakers(res.data))
+      axios.get(`${process.env.REACT_APP_MOCKAPI_URL}/favorites`)
+      .then(res => setFavorites(res.data))
   }, []);
   return (
     <div className="wrapper clear">
@@ -45,6 +48,9 @@ function App() {
           onAddToCart={onAddToCart}
           onAddToFavorites={onAddToFavorites}
         />
+      </Route>
+      <Route exact path="/favorites">
+        <Favorites favorites={favorites} />
       </Route>
     </div>
   );
