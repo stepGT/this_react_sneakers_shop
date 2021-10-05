@@ -24,7 +24,13 @@ function App() {
     setCartSneakers(prev => prev.filter(item => item.id !== id));
   };
   const onAddToFavorites = obj => {
-    axios.post(`${process.env.REACT_APP_MOCKAPI_URL}/favorites`, obj).then(setFavorites(prev => ([...prev, obj])));
+    //
+    if(favorites.find(favorites => favorites.id === obj.id)) {
+      axios.delete(`${process.env.REACT_APP_MOCKAPI_URL}/favorites/${obj.id}`);
+    }
+    else {
+      axios.post(`${process.env.REACT_APP_MOCKAPI_URL}/favorites`, obj).then(setFavorites(prev => ([...prev, obj])));
+    }
   };
   //
   useEffect(() => {
@@ -50,7 +56,7 @@ function App() {
         />
       </Route>
       <Route exact path="/favorites">
-        <Favorites favorites={favorites} />
+        <Favorites onFavorites={onAddToFavorites} favorited={true} favorites={favorites} />
       </Route>
     </div>
   );

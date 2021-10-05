@@ -1,6 +1,6 @@
 import Card from "../components/Card/Card";
 
-const Favorites = ({ favorites }) => {
+const Favorites = ({ favorites, favorited, onFavorites }) => {
     return (
         <div className="content p-40">
             <div className="d-flex align-center justify-between mb-40">
@@ -8,7 +8,7 @@ const Favorites = ({ favorites }) => {
             </div>
             <div className="d-flex flex-wrap">
                 {
-                    favorites.map((el) => <Card {...el} />)
+                    favorites.map((el) => <Card onFavorites={onFavorites} key={el.id} favorited={favorited} {...el} />)
                 }
             </div>
         </div>
