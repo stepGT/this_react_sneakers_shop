@@ -12,7 +12,7 @@ const Drawer = (props) => {
                     props.cartSneakers.length > 0 ? <>
                         <div className={styles.cartItems}>
                             {props.cartSneakers.map(item => {
-                                return <div className={styles.cartItem}>
+                                return <div key={item.id} className={styles.cartItem}>
                                     <div className={styles.cartItemImage} style={{ backgroundImage: `url(${item.imageUrl})` }}></div>
                                     <div className="mr-20 flex">
                                         <p className="mb-5">{item.title}</p>
@@ -38,11 +38,11 @@ const Drawer = (props) => {
                             </ul>
                             <button className={styles.greenBtn}>Checkout <img src="/img/arrow.svg" alt="Arrow" /></button>
                         </div>
-                    </> : <div class={`${styles.cartEmpty} d-flex align-center justify-center flex-column flex`}>
-                        <img class="mb-20" width="120px" height="120px" src="/img/empty-cart.jpg" alt="Empty" />
+                    </> : <div className={`${styles.cartEmpty} d-flex align-center justify-center flex-column flex`}>
+                        <img className="mb-20" width="120px" height="120px" src="/img/empty-cart.jpg" alt="Empty" />
                         <h2>Cart is empty</h2>
-                        <p class="opacity-6">Add at least one pair of sneakers to order.</p>
-                        <button onClick={props.onClose} class={`${styles.greenButton} ${styles.greenBtn}`}>
+                        <p className="opacity-6">Add at least one pair of sneakers to order.</p>
+                        <button onClick={props.onClose} className={`${styles.greenButton} ${styles.greenBtn}`}>
                             <img src="/img/arrow.svg" alt="Arrow" />
                             Back
                         </button>
