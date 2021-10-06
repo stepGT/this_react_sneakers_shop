@@ -1,7 +1,7 @@
 import Search from "../components/Search/Search";
 import Card from "../components/Card/Card";
 
-const Home = ({ sneakers, searchValue, setSearchValue, onChangeSearchInput, onAddToCart, onAddToFavorites }) => {
+const Home = ({ sneakers, searchValue, setSearchValue, onChangeSearchInput, onAddToCart, onAddToFavorites, cartSneakers }) => {
     return (
         <div className="content p-40">
             <div className="d-flex align-center justify-between mb-40">
@@ -13,6 +13,7 @@ const Home = ({ sneakers, searchValue, setSearchValue, onChangeSearchInput, onAd
                     onPlus={(obj) => onAddToCart(obj)}
                     onFavorites={(obj) => onAddToFavorites(obj)}
                     key={el.id}
+                    addedToCart={cartSneakers.some(item => Number(item.id) === Number(el.id))}
                     {...el} />)
                 }
             </div>

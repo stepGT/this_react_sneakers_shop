@@ -66,6 +66,7 @@ function App() {
       <Header onClickCard={() => setIsOpened(true)} />
       <Route exact path="/">
         <Home
+          cartSneakers={cartSneakers}
           sneakers={sneakers}
           searchValue={searchValue}
           setSearchValue={setSearchValue}
