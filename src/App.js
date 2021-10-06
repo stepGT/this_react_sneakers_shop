@@ -13,9 +13,19 @@ function App() {
   const [searchValue, setSearchValue] = useState('');
   const [favorites, setFavorites] = useState([]);
   //
-  const onAddToCart = (obj) => {
-    axios.post(`${process.env.REACT_APP_MOCKAPI_URL}/cart`, obj).then(res => setCartSneakers(prev => ([...prev, obj])));
-  }
+  const onAddToCart = obj => {
+    try {
+      if (cartSneakers.find(item => Number(item.id) === Number(obj.id))) {
+        setCartSneakers(prev => prev.filter(i => Number(i.id) !== Number(obj.id)));
+        axios.delete(`${process.env.REACT_APP_MOCKAPI_URL}/cart/${obj.id}`);
+      } else {
+        axios.post(`${process.env.REACT_APP_MOCKAPI_URL}/cart`, obj);
+        setCartSneakers((prev) => [...prev, obj]);
+      }
+    } catch (e) {
+      console.error("Error add to cart: ", e.message);
+    }
+  };
   const onChangeSearchInput = (e) => {
     setSearchValue(e.target.value)
   } 
