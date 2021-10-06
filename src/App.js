@@ -53,12 +53,25 @@ function App() {
   };
   //
   useEffect(() => {
-      axios.get(`${process.env.REACT_APP_MOCKAPI_URL}/items`)
-      .then(res => setSneakers(res.data))
-      axios.get(`${process.env.REACT_APP_MOCKAPI_URL}/cart`)
-      .then(res => setCartSneakers(res.data))
-      axios.get(`${process.env.REACT_APP_MOCKAPI_URL}/favorites`)
-      .then(res => setFavorites(res.data))
+    async function fetchData() {
+      // Fetch async cart data
+      const cartData = await axios.get(
+        `${process.env.REACT_APP_MOCKAPI_URL}/cart`
+      );
+      // Fetch async favorites data
+      const favoritesData = await axios.get(
+        `${process.env.REACT_APP_MOCKAPI_URL}/favorites`
+      );
+      // Fetch async items data
+      const itemsData = await axios.get(
+        `${process.env.REACT_APP_MOCKAPI_URL}/items`
+      );
+      // Save to state
+      setCartSneakers(cartData.data);
+      setFavorites(favoritesData.data);
+      setSneakers(itemsData.data);
+    }
+    fetchData();
   }, []);
   return (
     <div className="wrapper clear">
