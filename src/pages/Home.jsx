@@ -1,7 +1,10 @@
+import { useContext } from 'react'
 import Search from "../components/Search/Search";
 import Card from "../components/Card/Card";
+import AppContext from '../context';
 
 const Home = ({ sneakers, searchValue, setSearchValue, onChangeSearchInput, onAddToCart, onAddToFavorites, cartSneakers, isLoading }) => {
+    const { isItemAdded } = useContext(AppContext);
     const renderItems = () => {
         const filteredItems = sneakers.filter(item => item.title.toLowerCase().includes(searchValue));
 
@@ -9,7 +12,7 @@ const Home = ({ sneakers, searchValue, setSearchValue, onChangeSearchInput, onAd
             onPlus={(obj) => onAddToCart(obj)}
             onFavorites={(obj) => onAddToFavorites(obj)}
             key={index}
-            addedToCart={cartSneakers.some(item => Number(item.id) === Number(el.id))}
+            addedToCart={el && isItemAdded(el.id)}
             loading={isLoading}
             {...el} />)
     };
