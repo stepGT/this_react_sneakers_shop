@@ -80,7 +80,7 @@ function App() {
     return cartSneakers.some(obj => Number(obj.id) === Number(id))
   }
   return (
-    <AppContext.Provider value={{ sneakers, cartSneakers, favorites, isItemAdded }}>
+    <AppContext.Provider value={{ sneakers, cartSneakers, favorites, isItemAdded, onAddToFavorites }}>
       <div className="wrapper clear">
         { isOpened && <Drawer cartSneakers={cartSneakers} onClose={() => setIsOpened(false)} onRemove={onRemoveItem} /> }
         <Header onClickCard={() => setIsOpened(true)} />
@@ -97,7 +97,7 @@ function App() {
           />
         </Route>
         <Route exact path="/favorites">
-          <Favorites onFavorites={onAddToFavorites} favorited={true} />
+          <Favorites />
         </Route>
       </div>
     </AppContext.Provider>
