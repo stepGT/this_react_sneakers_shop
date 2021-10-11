@@ -1,8 +1,15 @@
 import React from "react";
 import styles from '../Drawer/Drawer.module.scss';
 import Info from '../../components/Info/Info'
+import AppContext from "../../context";
 
 const Drawer = (props) => {
+    const [isOrderComplete, setIsOrderComplete] = React.useState(false);
+    const { setCartSneakers } = React.useContext(AppContext);
+    const onClickOrder = () => {
+        setIsOrderComplete(true);
+        setCartSneakers([])
+    }
     return (
         <div className={styles.overlay}>
             <div className={styles.drawer}>
@@ -37,13 +44,13 @@ const Drawer = (props) => {
                                     <b>1070 &#8381;</b>
                                 </li>
                             </ul>
-                            <button className={styles.greenBtn}>Checkout <img src="/img/arrow.svg" alt="Arrow" /></button>
+                            <button onClick={onClickOrder} className={styles.greenBtn}>Checkout <img src="/img/arrow.svg" alt="Arrow" /></button>
                         </div>
                     </> : 
                     <Info
-                        title="Cart is empty"
-                        description="Add at least one pair of sneakers to order."
-                        image="/img/empty-cart.jpg"
+                        title={isOrderComplete ? "Order is processed!" : "Cart is empty"}
+                        description={isOrderComplete ? "Your order has been completed!" : "Add at least one pair of sneakers to order."}
+                        image={isOrderComplete ? "/img/complete-order.jpg" : "/img/empty-cart.jpg"}
                     />
                 }
             </div>
