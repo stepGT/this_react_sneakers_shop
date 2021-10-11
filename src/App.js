@@ -12,6 +12,7 @@ function App() {
   const [cartSneakers, setCartSneakers] = useState([]);
   const [searchValue, setSearchValue] = useState('');
   const [favorites, setFavorites] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   //
   const onAddToCart = obj => {
     try {
@@ -66,6 +67,7 @@ function App() {
       const itemsData = await axios.get(
         `${process.env.REACT_APP_MOCKAPI_URL}/items`
       );
+      setIsLoading(false);
       // Save to state
       setCartSneakers(cartData.data);
       setFavorites(favoritesData.data);
@@ -86,6 +88,7 @@ function App() {
           onChangeSearchInput={onChangeSearchInput}
           onAddToCart={onAddToCart}
           onAddToFavorites={onAddToFavorites}
+          isLoading={isLoading}
         />
       </Route>
       <Route exact path="/favorites">
