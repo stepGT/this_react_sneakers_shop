@@ -1,5 +1,6 @@
 import React from "react";
-import styles from './Drawer.module.scss';
+import styles from '../Drawer/Drawer.module.scss';
+import Info from '../../components/Info/Info'
 
 const Drawer = (props) => {
     return (
@@ -38,17 +39,13 @@ const Drawer = (props) => {
                             </ul>
                             <button className={styles.greenBtn}>Checkout <img src="/img/arrow.svg" alt="Arrow" /></button>
                         </div>
-                    </> : <div className={`${styles.cartEmpty} d-flex align-center justify-center flex-column flex`}>
-                        <img className="mb-20" width="120px" height="120px" src="/img/empty-cart.jpg" alt="Empty" />
-                        <h2>Cart is empty</h2>
-                        <p className="opacity-6">Add at least one pair of sneakers to order.</p>
-                        <button onClick={props.onClose} className={`${styles.greenButton} ${styles.greenBtn}`}>
-                            <img src="/img/arrow.svg" alt="Arrow" />
-                            Back
-                        </button>
-                    </div>
+                    </> : 
+                    <Info
+                        title="Cart is empty"
+                        description="Add at least one pair of sneakers to order."
+                        image="/img/empty-cart.jpg"
+                    />
                 }
-
             </div>
         </div>
     );
