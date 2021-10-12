@@ -15,6 +15,10 @@ const Drawer = (props) => {
             const { data } = await axios.post(`${process.env.REACT_APP_MOCKAPI_URL}/orders`, {
                 items: cartSneakers
             });
+            for (let i = 0; i < cartSneakers.length; i++) {
+                const item = cartSneakers[i];
+                await axios.delete(`${process.env.REACT_APP_MOCKAPI_URL}/cart/${item.id}`);
+            }
             setOrderID(data.id);
             setIsOrderComplete(true);
             setCartSneakers([]);
