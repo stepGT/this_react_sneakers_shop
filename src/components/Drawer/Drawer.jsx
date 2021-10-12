@@ -2,13 +2,26 @@ import React from "react";
 import styles from '../Drawer/Drawer.module.scss';
 import Info from '../../components/Info/Info'
 import AppContext from "../../context";
+import axios from "axios";
 
 const Drawer = (props) => {
     const [isOrderComplete, setIsOrderComplete] = React.useState(false);
-    const { setCartSneakers } = React.useContext(AppContext);
-    const onClickOrder = () => {
-        setIsOrderComplete(true);
-        setCartSneakers([])
+    const [isLoading, setIsLoading] = React.useState(false);
+    const [orderID, setOrderID] = React.useState(null);
+    const { cartSneakers, setCartSneakers } = React.useContext(AppContext);
+    const onClickOrder = async () => {
+        try {
+            setIsLoading(true);
+            const { data } = await axios.post(`${process.env.REACT_APP_MOCKAPI_URL}/orders`, {
+                items: cartSneakers
+            });
+            setOrderID(data.id);
+            setIsOrderComplete(true);
+            setCartSneakers([]);
+        } catch (error) {
+            alert('Failed to create order! (' + error.message + ')');
+        }
+        setIsLoading(false);
     }
     return (
         <div className={styles.overlay}>
@@ -44,12 +57,12 @@ const Drawer = (props) => {
                                     <b>1070 &#8381;</b>
                                 </li>
                             </ul>
-                            <button onClick={onClickOrder} className={styles.greenBtn}>Checkout <img src="/img/arrow.svg" alt="Arrow" /></button>
+                            <button disabled={isLoading} onClick={onClickOrder} className={styles.greenBtn}>Checkout <img src="/img/arrow.svg" alt="Arrow" /></button>
                         </div>
                     </> : 
                     <Info
                         title={isOrderComplete ? "Order is processed!" : "Cart is empty"}
-                        description={isOrderComplete ? "Your order has been completed!" : "Add at least one pair of sneakers to order."}
+                        description={isOrderComplete ? `Your order #${orderID} has been completed!` : "Add at least one pair of sneakers to order."}
                         image={isOrderComplete ? "/img/complete-order.jpg" : "/img/empty-cart.jpg"}
                     />
                 }
