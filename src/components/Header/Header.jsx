@@ -1,11 +1,10 @@
 import React from "react";
 import styles from './Header.module.scss';
 import { Link } from "react-router-dom";
-import AppContext from '../../context';
+import {useCart} from '../../hooks/useCart';
 
 const Header = (props) => {
-    const { cartSneakers } = React.useContext(AppContext);
-    const totalPriceCart = cartSneakers.reduce((sum, obj) => obj.price + sum, 0);
+    const {totalPriceCart} = useCart();
     return <header className={styles.header}>
         <div className={styles.left}>
             <Link to="/">

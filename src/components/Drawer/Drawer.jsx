@@ -1,15 +1,14 @@
 import React from "react";
 import styles from '../Drawer/Drawer.module.scss';
 import Info from '../../components/Info/Info'
-import AppContext from "../../context";
 import axios from "axios";
+import {useCart} from '../../hooks/useCart';
 
 const Drawer = (props) => {
     const [isOrderComplete, setIsOrderComplete] = React.useState(false);
     const [isLoading, setIsLoading] = React.useState(false);
     const [orderID, setOrderID] = React.useState(null);
-    const { cartSneakers, setCartSneakers } = React.useContext(AppContext);
-    const totalPriceCart = cartSneakers.reduce((sum, obj) => obj.price + sum, 0);
+    const {cartSneakers, setCartSneakers, totalPriceCart} = useCart();
     const onClickOrder = async () => {
         try {
             setIsLoading(true);
