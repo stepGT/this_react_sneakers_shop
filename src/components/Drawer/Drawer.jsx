@@ -9,6 +9,7 @@ const Drawer = (props) => {
     const [isLoading, setIsLoading] = React.useState(false);
     const [orderID, setOrderID] = React.useState(null);
     const { cartSneakers, setCartSneakers } = React.useContext(AppContext);
+    const totalPriceCart = cartSneakers.reduce((sum, obj) => obj.price + sum, 0);
     const onClickOrder = async () => {
         try {
             setIsLoading(true);
@@ -53,12 +54,12 @@ const Drawer = (props) => {
                                 <li>
                                     <span>Total:</span>
                                     <div></div>
-                                    <b>21 456 &#8381;</b>
+                                    <b>{ totalPriceCart } &#8381;</b>
                                 </li>
                                 <li>
                                     <span>Tax 5%:</span>
                                     <div></div>
-                                    <b>1070 &#8381;</b>
+                                    <b>{ totalPriceCart / 100 * 5 } &#8381;</b>
                                 </li>
                             </ul>
                             <button disabled={isLoading} onClick={onClickOrder} className={styles.greenBtn}>Checkout <img src="/img/arrow.svg" alt="Arrow" /></button>
