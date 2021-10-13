@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import Favorites from './pages/Favorites';
 import { Route } from 'react-router';
 import AppContext from './context';
+import Orders from './pages/Orders';
 
 function App() {
   const [isOpened, setIsOpened] = useState(false);
@@ -98,6 +99,9 @@ function App() {
         </Route>
         <Route exact path="/favorites">
           <Favorites />
+        </Route>
+        <Route exact path="/orders">
+          <Orders />
         </Route>
       </div>
     </AppContext.Provider>

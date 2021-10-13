@@ -18,7 +18,7 @@ const Header = (props) => {
 
         <ul className={styles.right}>
             <li onClick={props.onClickCard} className="mr-30 cu-p">
-                <img className="mr-15" width={18} height={18} alt="Logo" src="/img/user.svg" />
+                <img className="mr-15" width={18} height={18} alt="Logo" src="/img/cart.svg" />
                 <span>{ totalPriceCart } &#8381;</span>
             </li>
             <li className="mr-20 cu-p">
@@ -27,7 +27,9 @@ const Header = (props) => {
                 </Link>
             </li>
             <li>
-                <img width={18} height={18} alt="Logo" src="/img/cart.svg" />
+                <Link to="/orders">
+                    <img width={18} height={18} alt="Logo" src="/img/user.svg" />
+                </Link>
             </li>
         </ul>
     </header>
