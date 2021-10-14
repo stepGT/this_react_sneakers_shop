@@ -31,7 +31,9 @@ const Card = ({ id, title, imageUrl, price, onPlus, onFavorites, favorited = fal
                 </ContentLoader> : (
                     <>
                         <div className={styles.favorite} onClick={() => { }}>
-                            <img onClick={() => onClickFavorite({ id, title, imageUrl, price })} src={isFavorite ? '/img/liked.svg' : '/img/unliked.svg'} className="cu-p" alt={isFavorite ? 'Liked' : 'Unliked'} />
+                            {
+                                onFavorites && <img onClick={() => onClickFavorite({ id, title, imageUrl, price })} src={isFavorite ? '/img/liked.svg' : '/img/unliked.svg'} className="cu-p" alt={isFavorite ? 'Liked' : 'Unliked'} />
+                            }
                         </div>
                         <img
                             width={133}
@@ -45,7 +47,14 @@ const Card = ({ id, title, imageUrl, price, onPlus, onFavorites, favorited = fal
                                 <span>Price</span>
                                 <b>{price} &#8381;</b>
                             </div>
-                            <img className={styles.plus} onClick={onClickHandler} alt="Plus" src={isItemAdded(id) ? '/img/btn-checked.svg' : '/img/btn-plus.svg'} />
+                            {
+                                onPlus && <img
+                                    className={styles.plus}
+                                    onClick={onClickHandler}
+                                    alt="Plus"
+                                    src={isItemAdded(id) ? '/img/btn-checked.svg' : '/img/btn-plus.svg'}
+                                />
+                            }
                         </div>
                     </>
                 )
