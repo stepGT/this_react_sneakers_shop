@@ -16,13 +16,13 @@ function App() {
   const [favorites, setFavorites] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   //
-  const onAddToCart = obj => {
+  const onAddToCart = async obj => {
     try {
       if (cartSneakers.find(item => Number(item.id) === Number(obj.id))) {
         setCartSneakers(prev => prev.filter(i => Number(i.id) !== Number(obj.id)));
-        axios.delete(`${process.env.REACT_APP_MOCKAPI_URL}/cart/${obj.id}`);
+        await axios.delete(`${process.env.REACT_APP_MOCKAPI_URL}/cart/${obj.id}`);
       } else {
-        axios.post(`${process.env.REACT_APP_MOCKAPI_URL}/cart`, obj);
+        await axios.post(`${process.env.REACT_APP_MOCKAPI_URL}/cart`, obj);
         setCartSneakers((prev) => [...prev, obj]);
       }
     } catch (e) {
@@ -57,23 +57,27 @@ function App() {
   //
   useEffect(() => {
     async function fetchData() {
-      // Fetch async cart data
-      const cartData = await axios.get(
-        `${process.env.REACT_APP_MOCKAPI_URL}/cart`
-      );
-      // Fetch async favorites data
-      const favoritesData = await axios.get(
-        `${process.env.REACT_APP_MOCKAPI_URL}/favorites`
-      );
-      // Fetch async items data
-      const itemsData = await axios.get(
-        `${process.env.REACT_APP_MOCKAPI_URL}/items`
-      );
-      setIsLoading(false);
-      // Save to state
-      setCartSneakers(cartData.data);
-      setFavorites(favoritesData.data);
-      setSneakers(itemsData.data);
+      try {
+        // Fetch async cart data
+        const cartData = await axios.get(
+          `${process.env.REACT_APP_MOCKAPI_URL}/cart`
+        );
+        // Fetch async favorites data
+        const favoritesData = await axios.get(
+          `${process.env.REACT_APP_MOCKAPI_URL}/favorites`
+        );
+        // Fetch async items data
+        const itemsData = await axios.get(
+          `${process.env.REACT_APP_MOCKAPI_URL}/items`
+        );
+        setIsLoading(false);
+        // Save to state
+        setCartSneakers(cartData.data);
+        setFavorites(favoritesData.data);
+        setSneakers(itemsData.data);
+      } catch (error) {
+        alert('Error fetching data!', error)
+      }
     }
     fetchData();
   }, []);
