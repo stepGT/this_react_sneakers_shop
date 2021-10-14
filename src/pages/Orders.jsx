@@ -4,13 +4,15 @@ import Card from '../components/Card/Card';
 import AppContext from '../context';
 
 const Orders = () => {
-    const {onAddToCart, onAddToFavorites, isLoading} = React.useContext(AppContext);
+    const {onAddToCart, onAddToFavorites} = React.useContext(AppContext);
     const [orders, setOrders] = React.useState([]);
+    const [isLoading, setIsLoading] = React.useState(true);
     React.useEffect(() => {
         (async () => {
             try {
                 const { data } = await axios.get(`${process.env.REACT_APP_MOCKAPI_URL}/orders`);
                 setOrders(data.reduce((prev, obj) => [...prev, ...obj.items], []));
+                setIsLoading(false);
             } catch (error) {
                 alert('Error! Get orders', error)
             }
@@ -23,7 +25,7 @@ const Orders = () => {
             </div>
             <div className="d-flex flex-wrap">
                 {
-                    orders.map((el, ind) => <Card
+                    (isLoading ? [...Array(8)] : orders).map((el, ind) => <Card
                     onPlus={obj => onAddToCart(obj)}
                     onFavorites={obj => onAddToFavorites(obj)}
                     key={ind}
