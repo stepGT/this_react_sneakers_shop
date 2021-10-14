@@ -58,18 +58,11 @@ function App() {
   useEffect(() => {
     async function fetchData() {
       try {
-        // Fetch async cart data
-        const cartData = await axios.get(
-          `${process.env.REACT_APP_MOCKAPI_URL}/cart`
-        );
-        // Fetch async favorites data
-        const favoritesData = await axios.get(
-          `${process.env.REACT_APP_MOCKAPI_URL}/favorites`
-        );
-        // Fetch async items data
-        const itemsData = await axios.get(
-          `${process.env.REACT_APP_MOCKAPI_URL}/items`
-        );
+        const [cartData, favoritesData, itemsData] = await Promise.all([
+          axios.get( `${process.env.REACT_APP_MOCKAPI_URL}/cart`),
+          axios.get( `${process.env.REACT_APP_MOCKAPI_URL}/favorites`),
+          axios.get( `${process.env.REACT_APP_MOCKAPI_URL}/items`)
+        ]);
         setIsLoading(false);
         // Save to state
         setCartSneakers(cartData.data);
