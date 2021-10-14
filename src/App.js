@@ -32,9 +32,13 @@ function App() {
   const onChangeSearchInput = (e) => {
     setSearchValue(e.target.value)
   } 
-  const onRemoveItem = id => {
-    axios.delete(`${process.env.REACT_APP_MOCKAPI_URL}/cart/${id}`);
-    setCartSneakers(prev => prev.filter(item => item.id !== id));
+  const onRemoveItem = async id => {
+    try {
+      await axios.delete(`${process.env.REACT_APP_MOCKAPI_URL}/cart/${id}`);
+      setCartSneakers(prev => prev.filter(item => item.id !== id));
+    } catch (error) {
+      alert('Error while deleting from cart!', error);
+    }
   };
   const onAddToFavorites = async (obj) => {
     try {
