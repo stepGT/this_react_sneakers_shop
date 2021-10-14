@@ -9,7 +9,6 @@ const Home = ({ sneakers, searchValue, setSearchValue, onChangeSearchInput, onAd
             onPlus={(obj) => onAddToCart(obj)}
             onFavorites={(obj) => onAddToFavorites(obj)}
             key={index}
-            addedToCart={cartSneakers.some(item => Number(item.id) === Number(el.id))}
             loading={isLoading}
             {...el} />)
     };

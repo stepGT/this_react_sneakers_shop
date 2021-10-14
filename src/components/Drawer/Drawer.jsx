@@ -1,7 +1,32 @@
 import React from "react";
-import styles from './Drawer.module.scss';
+import styles from '../Drawer/Drawer.module.scss';
+import Info from '../../components/Info/Info'
+import axios from "axios";
+import {useCart} from '../../hooks/useCart';
 
 const Drawer = (props) => {
+    const [isOrderComplete, setIsOrderComplete] = React.useState(false);
+    const [isLoading, setIsLoading] = React.useState(false);
+    const [orderID, setOrderID] = React.useState(null);
+    const {cartSneakers, setCartSneakers, totalPriceCart} = useCart();
+    const onClickOrder = async () => {
+        try {
+            setIsLoading(true);
+            const { data } = await axios.post(`${process.env.REACT_APP_MOCKAPI_URL}/orders`, {
+                items: cartSneakers
+            });
+            for (let i = 0; i < cartSneakers.length; i++) {
+                const item = cartSneakers[i];
+                await axios.delete(`${process.env.REACT_APP_MOCKAPI_URL}/cart/${item.id}`);
+            }
+            setOrderID(data.id);
+            setIsOrderComplete(true);
+            setCartSneakers([]);
+        } catch (error) {
+            alert('Failed to create order! (' + error.message + ')');
+        }
+        setIsLoading(false);
+    }
     return (
         <div className={styles.overlay}>
             <div className={styles.drawer}>
@@ -28,27 +53,23 @@ const Drawer = (props) => {
                                 <li>
                                     <span>Total:</span>
                                     <div></div>
-                                    <b>21 456 &#8381;</b>
+                                    <b>{ totalPriceCart } &#8381;</b>
                                 </li>
                                 <li>
                                     <span>Tax 5%:</span>
                                     <div></div>
-                                    <b>1070 &#8381;</b>
+                                    <b>{ totalPriceCart / 100 * 5 } &#8381;</b>
                                 </li>
                             </ul>
-                            <button className={styles.greenBtn}>Checkout <img src="/img/arrow.svg" alt="Arrow" /></button>
+                            <button disabled={isLoading} onClick={onClickOrder} className={styles.greenBtn}>Checkout <img src="/img/arrow.svg" alt="Arrow" /></button>
                         </div>
-                    </> : <div className={`${styles.cartEmpty} d-flex align-center justify-center flex-column flex`}>
-                        <img className="mb-20" width="120px" height="120px" src="/img/empty-cart.jpg" alt="Empty" />
-                        <h2>Cart is empty</h2>
-                        <p className="opacity-6">Add at least one pair of sneakers to order.</p>
-                        <button onClick={props.onClose} className={`${styles.greenButton} ${styles.greenBtn}`}>
-                            <img src="/img/arrow.svg" alt="Arrow" />
-                            Back
-                        </button>
-                    </div>
+                    </> : 
+                    <Info
+                        title={isOrderComplete ? "Order is processed!" : "Cart is empty"}
+                        description={isOrderComplete ? `Your order #${orderID} has been completed!` : "Add at least one pair of sneakers to order."}
+                        image={isOrderComplete ? "/img/complete-order.jpg" : "/img/empty-cart.jpg"}
+                    />
                 }
-
             </div>
         </div>
     );
