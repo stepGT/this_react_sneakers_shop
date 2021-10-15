@@ -18,12 +18,13 @@ function App() {
   //
   const onAddToCart = async obj => {
     try {
-      if (cartSneakers.find(item => Number(item.id) === Number(obj.id))) {
-        setCartSneakers(prev => prev.filter(i => Number(i.id) !== Number(obj.id)));
-        await axios.delete(`${process.env.REACT_APP_MOCKAPI_URL}/cart/${obj.id}`);
+      const findItem = cartSneakers.find(item => Number(item.pid) === Number(obj.id));
+      if (findItem) {
+        setCartSneakers(prev => prev.filter(i => Number(i.pid) !== Number(obj.id)));
+        await axios.delete(`${process.env.REACT_APP_MOCKAPI_URL}/cart/${findItem.id}`);
       } else {
-        await axios.post(`${process.env.REACT_APP_MOCKAPI_URL}/cart`, obj);
-        setCartSneakers((prev) => [...prev, obj]);
+        const { data } = await axios.post(`${process.env.REACT_APP_MOCKAPI_URL}/cart`, obj);
+        setCartSneakers((prev) => [...prev, data]);
       }
     } catch (e) {
       console.error("Error add to cart: ", e.message);
@@ -35,7 +36,7 @@ function App() {
   const onRemoveItem = async id => {
     try {
       await axios.delete(`${process.env.REACT_APP_MOCKAPI_URL}/cart/${id}`);
-      setCartSneakers(prev => prev.filter(item => item.id !== id));
+      setCartSneakers(prev => prev.filter(item => Number(item.id) !== Number(id)));
     } catch (error) {
       alert('Error while deleting from cart!', error);
     }
@@ -79,7 +80,7 @@ function App() {
     fetchData();
   }, []);
   const isItemAdded = (id) => {
-    return cartSneakers.some(obj => Number(obj.id) === Number(id))
+    return cartSneakers.some(obj => Number(obj.pid) === Number(id))
   }
   return (
     <AppContext.Provider value={{ sneakers, cartSneakers, favorites, isItemAdded, onAddToFavorites, setIsOpened, setCartSneakers, onAddToCart }}>
